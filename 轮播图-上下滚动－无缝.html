@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="format-detection" content="telphone=no, email=no" />
+
+  <title>纯CSS3 加载动画</title>
+
+    <style>
+
+ul, dl, dd, h1, h2, h3, h4, h5, h6, form, p, span, li {
+	padding:0;
+	margin:0;
+}
+ul {
+	list-style:none
+}
+a {
+	color:#333333;
+	text-decoration:none;
+}
+
+a:hover{
+	color:#ffffff}
+img {
+	border:none;
+	margin:0;
+	padding:0;
+	display:block
+}
+form {
+	margin:0;
+	padding:0;
+	border:0
+}
+b {
+	font-weight:normal
+}
+
+body{
+ margin:0;
+        padding:0;
+  background:#fff;
+  font-family: "微软雅黑";
+  font-size:14px
+}
+
+
+/* 图片轮播 */	
+.num_list .num{
+     display:block;
+	 float:left;
+     width:25px;
+	 height:25px;
+	 text-align:center;
+	 line-height:25px;
+	 margin-left:5px;
+	 background:#ccc;
+	 color:#ffffff}
+.num_list .choose_num{background-color:#ff6c22}	 
+.num_list(overflow:hidden)
+.num_list li{float:left}	
+.img_list li { position:relative ;}
+.img_list{ width:800px ;height:2574px;position:relative}    
+#box{position:relative;width:800px;height:429px;background:#fff;overflow:hidden;border-radius:5px;margin:120px auto;cursor:pointer;}
+#box .list{position:relative;width:800px;height:429px;overflow:hidden;}
+#box .list ul{position:absolute;top:0;left:0;}
+#box .count{position:absolute;right:0;bottom:5px;}
+#box .count li{color:#fff;float:left;width:20px;height:20px;cursor:pointer;margin-right:5px;overflow:hidden;background:#F90;opacity:0.7;filter:alpha(opacity=70);border-radius:20px;}
+#box .count li.current{color:#fff;opacity:1;filter:alpha(opacity=100);font-weight:700;background:#f60;}
+#tmp{width:100px;height:100px;background:red;position:absolute;}
+.num_list{position:absolute;
+           bottom:15px;
+		   right:15px;
+		   z-index:99
+          }
+.num_list .choose_num{background-color:#ff6c22}	
+.page{ width:1000px;margin:0 auto;clear:both;overflow:hidden}
+
+/* 选项卡  */
+.content_wrap{float: left;
+height: 326px;
+overflow: hidden;
+width: 500px; }
+
+.content_wrap p{width:249px;float:left; margin-right:1px;text-align:center;height:45px;line-height:45px;background:#ccc;
+color:#ffffff }
+.content_wrap .choose_tit{ background:#ff6c22} 
+
+
+.box_img{border: 2px solid #ccc;
+             float:right;
+             width: 300px;}
+.box_img p img{width:300px}	
+.box_img p b{display:block;padding:35px 0;text-align:center}
+.img_big{display:none;position:fixed;z-index:200;width:800px;top:0;overflow:hidden;margin:0 auto}
+.overlay{ height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+	 background-color: #000;
+    opacity: 0.75;
+	display:none}	  
+	
+
+</style>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+
+
+
+<script type="text/javascript">
+
+       $(function(){
+      
+        var  banner_index=1;
+        var  clone= $(".img_list li:first").clone(); //复制第一张图片插入到图片列表中
+        $(".img_list").append(clone);	
+           
+	var  banner_time=setInterval(banner_move,3000) 
+       
+	 //自动播放函数	         		                     			      
+	function  banner_move(){
+	    
+			if(banner_index ==$(".img_list li").length-1){
+			
+				banner_index=0; }
+				
+		      if( banner_index ==1)
+			     {                       /*为什么这里要等于1呢？网页测试的效果是：当banner_index=1的时候，
+				                           下一张轮播为空，所以这个时候应该设置图片列表的css（"top","0"),这样就可以又从第一张轮播  */			
+			      $(".img_list").css("top","0")}				  
+										  
+	                   $(".img_list").animate({top:"-=429"},"800");
+	                   $(".num_list li").css("background-color","#ccc");
+	                   $(".num_list li").eq(banner_index).css("background-color","rgb(255,108,34)");
+		 
+                         banner_index++	}
+	
+    
+    
+						 
+          //鼠标经过图片切换
+         $(".num_list li").hover(function(){
+	           clearInterval(banner_time);//清除计时器
+	                    var  imgHeight=$(".img_list li img").eq($(this).index()).height();
+                          $(".img_list").animate({top:-imgHeight*$(this).index()},500);//鼠标移动当前图片列表移动的高度
+	                   $(".num_list li").css("background-color","#ccc");
+	                   $(".num_list li").eq($(this).index()).css("background-color","#ff6c22");}
+ 
+		          ,function(){   			   				                 				               
+			       banner_index=$(this).index()+1;  //图片的index是当前鼠标经过的li的index+1
+		              banner_time= setInterval(banner_move,3000)
+						  }	
+						  )
+
+ $(function(){
+			  // 选项卡
+           
+        $(".content").hide();
+		$(".content").eq(0).show();
+		
+         $(".content_wrap p").hover(function()
+		 {
+		   $(".content_wrap p").css("background","#ccc");
+		  $(".content_wrap p").eq($(this).index()).css("background-color","#ff6c22");
+		  $(".content").hide();
+		  $(".content").eq($(this).index()).show();     		  
+ }
+ )  	  		
+		
+}	    	
+)	 //选项卡结束
+
+            
+                         })	 
+
+
+</script>
+</head>
+<body>
+ 
+  <div class="list_div" style="margin-top:20px">
+      
+ 
+
+<div id="box"  class="list_div" >
+    <div class="list_img">
+	<ul class="num_list">
+		    <li class="num choose_num">1</li>
+			 <li class="num">2</li>
+			 <li class="num">3</li>
+			 <li class="num">4</li>
+			 <li class="num">5</li>
+		
+		</ul>
+        <ul class="img_list">
+            <li style="z-index:10"><a href=""><img  src="img/01.jpg" width="800" height="429" /></a></li>
+            <li style="z-index:8"><a href=""><img src="img/02.jpg" width="800" height="429" /></a></li>
+            <li style="z-index:7"><a href=""><img src="img/03.jpg" width="800" height="429" /></a></li>
+            <li style="z-index:6"><a href=""><img src="img/04.jpg" width="800" height="429" /></a></li>
+            <li style="z-index:5"><a href=""><img src="img/05.jpg" width="800" height="429" /></a></li>
+		
+		
+    </div>
+</div>
+
+ 
+</div>
+  
+  
+
+   </div>
+</body>
+
+</html>
