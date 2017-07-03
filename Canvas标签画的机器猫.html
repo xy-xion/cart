@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="format-detection" content="telphone=no, email=no">
+
+  <title>纯CSS3 加载动画</title>
+
+  <style>
+
+ul, dl, dd, h1, h2, h3, h4, h5, h6, form, p, span, li {
+	padding:0;
+	margin:0;
+}
+ul {
+	list-style:none
+}
+a {
+	color:#333333;
+	text-decoration:none;
+}
+
+a:hover{
+	color:#ffffff}
+img {
+	border:none;
+	margin:0;
+	padding:0;
+	display:block
+}
+form {
+	margin:0;
+	padding:0;
+	border:0
+}
+b {
+	font-weight:normal
+}
+
+body{
+ margin:0;
+        padding:0;
+  background:#fff;
+  font-family: "微软雅黑";
+  font-size:14px
+}
+</style>
+</head>
+<body>
+<div style="">
+<canvas id="Canvas"  style=" ;padding: 0;display: block"> 您的浏览器不支持canvas，建议使用最新版的Chrome</canvas>
+ </div>
+<script type="text/javascript">
+window.onload=function()
+        {
+            var   c=document.getElementById("Canvas");
+            var  ctx=c.getContext("2d");
+						
+            ctx.canvas.width  = window.screen.width/2 ;
+            ctx.canvas.height = window.screen.height/3;
+     
+            //头
+            ctx.beginPath();   //蓝色头
+            ctx.arc(150,120,80,0.7*Math.PI,-1.7*Math.PI)	
+            ctx.stokeStyle="black";
+            ctx.lineWidth=3;
+            ctx.stroke();
+            ctx.fillStyle="#31b3f9";	
+            ctx.fill();	
+ 
+	    ctx.beginPath();	  //白色正方形矩形	
+	    ctx.fillStyle="#ffffff";		
+            ctx.fillRect(110,90,80,96);
+	    ctx.fill();
+
+ 	    ctx.beginPath();   //胡须左边弧度
+	    ctx.moveTo(110,90);
+            ctx.quadraticCurveTo(60,130,110,185);
+	    ctx.fillStyle="#ffffff";	
+            ctx.fill();	
+	    ctx.stokeStyle="black";
+            ctx.lineWidth=1;
+            ctx.stroke();							
+			
+ 	    ctx.beginPath();  //胡须右边弧度
+	    ctx.moveTo(190,90);
+            ctx.quadraticCurveTo(243,130,190,185);
+	    ctx.fillStyle="#ffffff";	
+            ctx.fill();	
+	    ctx.stokeStyle="black";
+            ctx.stroke();				
+
+ 	    ctx.beginPath();   //左边胡须（上）
+	    ctx.moveTo(100,120);
+	    ctx.lineTo(130,130);
+            ctx.stroke();				
+
+ 	    ctx.beginPath();  //左边胡须（中）
+	    ctx.moveTo(100,135);
+	    ctx.lineTo(130,135);
+            ctx.stroke();
+
+ 	    ctx.beginPath(); //左边胡须（下）
+	    ctx.moveTo(100,150);
+	    ctx.lineTo(130,140);
+            ctx.lineWidth=1;		
+            ctx.stroke();
+
+ 	    ctx.beginPath();  //鼻子下面竖线
+	    ctx.moveTo(150,125);
+	    ctx.lineTo(150,175);
+            ctx.stroke();				
+
+ 	    ctx.beginPath();   //右边胡须（上）
+	    ctx.moveTo(170,130);
+	    ctx.lineTo(200,120);
+            ctx.stroke();				
+
+ 	    ctx.beginPath();  //右边胡须（中）
+	    ctx.moveTo(170,135);
+	    ctx.lineTo(200,135);
+            ctx.stroke();
+
+ 	    ctx.beginPath(); //右边胡须（下）
+	    ctx.moveTo(170,140);
+	    ctx.lineTo(200,150);
+            ctx.lineWidth=1;		
+            ctx.stroke();
+
+ 	    ctx.beginPath();  //嘴巴
+	    ctx.moveTo(100,159);
+            ctx.quadraticCurveTo(150,195,200,159);
+            ctx.stroke();				
+				
+	    ctx.beginPath();//左眼
+	    ctx.moveTo(130,60);
+            ctx.bezierCurveTo(105,60,105,110,130,110);
+	    ctx.lineWidth=2;
+            ctx.moveTo(130,110);
+            ctx.bezierCurveTo(155,110,155,60,130,60);
+ 	    ctx.stroke();	
+ 	    ctx.fillStyle="#ffffff";	
+            ctx.fill();
+			
+	    ctx.beginPath();	//左眼珠		
+  	    ctx.arc(135,100,5,0,2*Math.PI)
+  	    ctx.fillStyle="#010101";	
+            ctx.fill();	
+
+	    ctx.beginPath();  //右眼
+	    ctx.moveTo(170,60);
+            ctx.bezierCurveTo(145,60,145,110,170,110);
+	    ctx.lineWidth=2;
+            ctx.moveTo(170,110);
+            ctx.bezierCurveTo(195,110,195,60,170,60);
+ 	    ctx.stroke();	
+ 	    ctx.fillStyle="#ffffff";	
+            ctx.fill();	
+			
+	    ctx.beginPath();	 //右眼珠			
+  	    ctx.arc(165,100,5,0,2*Math.PI)
+  	    ctx.fillStyle="#010101";	
+            ctx.fill();
+			
+	    ctx.beginPath();	 //红色鼻子		
+  	    ctx.arc(150,112,10,0,2*Math.PI);
+	    ctx.stroke();	
+  	    ctx.fillStyle="#be3809";	
+            ctx.fill();
+						   
+	}	
+</script>
+</body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="format-detection" content="telphone=no, email=no" />
+
+  <title>纯CSS3 加载动画</title>
+
+    <style>
+
+ul, dl, dd, h1, h2, h3, h4, h5, h6, form, p, span, li {
+	padding:0;
+	margin:0;
+}
+ul {
+	list-style:none
+}
+a {
+	color:#333333;
+	text-decoration:none;
+}
+
+a:hover{
+	color:#ffffff}
+img {
+	border:none;
+	margin:0;
+	padding:0;
+	display:block
+}
+form {
+	margin:0;
+	padding:0;
+	border:0
+}
+b {
+	font-weight:normal
+}
+
+body{
+ margin:0;
+        padding:0;
+  background:#fff;
+  font-family: "微软雅黑";
+  font-size:14px
+}
+
+/* 选项卡  */
+.content_wrap{
+                        float: left;
+                        height: 326px;
+                        overflow: hidden;
+                        width: 500px; }
+
+.content_wrap p{
+                        width:249px;
+                        float:left; 
+                        margin-right:1px;
+                        text-align:center;
+                        height:45px;
+                        line-height:45px;
+                        background:#ccc;
+                        color:#ffffff }
+.content_wrap .choose_tit{ 
+                        background:#ff6c22} 
+
+
+.box_img{
+                        border: 2px solid #ccc;
+                        width: 300px;
+                        margin:0 auto}
+.box_img p img{width:300px}	
+.box_img p b{
+                        display:block;
+                        padding:35px 0;
+                        text-align:center}
+.img_big{
+                        display:none;
+                        position:fixed;
+                        z-index:200;
+                        width:800px;
+                        top:0;
+                        overflow:hidden;
+                        margin:0 auto}
+.overlay{ 
+                        height: 100%;
+                        left: 0;
+                        position: fixed;
+                        top: 0;
+                        width: 100%;
+                        z-index: 100;
+                        background-color: #000;
+                        opacity: 0.75;
+                        display:none}	  
+	
+
+</style>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+       $(function(){
+
+             //点击图片缩放
+               var  imgHeight =$(".img_big img").height();//获取当前图片高度
+               var  imgWidth =$(".img_big img").width();//获取当前图片宽度
+               var  showWidth=($(window).width()- imgWidth)/2;//点击后图片距离左边位置
+               var  showHeight=($(window).height()- imgHeight)/2;//点击后图片距离顶部位置
+                
+               $(".box_img p b").hover(function ()
+		      {
+                           $(this).css("cursor","pointer") //鼠标经过显示手的图标
+		      })
+			  
+               var  clickFunction=
+		      {
+                           getImgShow()
+		               {
+                                    $(".img_big").fadeIn();
+                                    $(".img_big").css("top",showHeight );
+                                    $(".img_big").css("left",showWidth);
+                                    $(".overlay").fadeIn();
+                                    $("body").css("overflow","hidden");//禁用滚动条				
+		               },
+
+                           getImgHide()
+		               {
+                                    $(".overlay").fadeOut();
+                                    $(".img_big").fadeOut();
+                                    $("body").css("overflow","auto");
+		               }                     
+//结束		
+		      };
+   $(".box_img p b").click(function ()
+		               { //点击后图片渐现
+                                    clickFunction.getImgShow()	
+		               }) 
+				
+                           $(".img_big").click(function  ()
+		               { //点击后图片渐隐
+                                    clickFunction.getImgHide()						   
+		               })			  
+
+})	
+</script>
+</head>
+<body>
+ <!-- 鼠标点击图片放大 -->
+      <div class="box_img" style="border:2px solid #ccc">
+	             <p><img src="img/01_small.jpg">
+				   <b>查看大图</b>
+			</p>		    
+	  </div>
+        <div class="img_big"><img src="img/01_big.jpg" width="800" height="429" ></div>
+	  <div class="overlay"></div>
+</body>
+</html>

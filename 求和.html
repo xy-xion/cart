@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+      <title>无标题</title>
+        <script type="text/javascript">
+window.onload=function(){
+
+    var btn=document.getElementsByTagName("input")[0];
+
+    var oButton=document.getElementsByTagName("button")[0];
+    var oStrong=document.getElementsByTagName("p")[0];
+
+	btn.onkeyup = function ()
+	{
+		this.value = this.value.replace(/[^(\d)|(,)]/,"")}
+    oButton.onclick=function getSum()
+	{
+	    var sum=0;  
+	    var btn=document.getElementsByTagName("input")[0].value.split(",");
+        for(var i=0; i<btn.length;i++)
+	   {
+	       sum+=parseInt(btn[i]);	
+	}
+	oStrong.innerHTML=sum;
+	 
+	
+}   
+} 
+</script>
+
+<!--用for in 循环实现</!->
+<script type="text/javascript">
+window.onload=function(){
+var btn=document.getElementsByTagName("input")[0];
+var oButton=document.getElementsByTagName("button")[0];
+var oStrong=document.getElementsByTagName("p")[0];
+
+    oButton.onclick=function (){
+    var sum=0;
+	var btn1=document.getElementsByTagName("input")[0].value.split("+")
+    for(var i in btn1){ 	
+    sum+=parseInt(btn1[i]);	
+	}
+	oStrong.innerHTML=sum
+}    
+} 
+</script>-->
+    </head>
+    <body>
+        <div>
+        <label for=""><input type="text" value="3,3,7" name="input_text" /></label>
+	   <button  class="submit" style="padding:3px;border:1px solid #ccc;width:50px;margin-right:10px;">求和</button>
+	   <span>输入框数字可自行修改</span>
+	   <p style="color:red;font-size:20px"></p>
+  </div>
+    </body>
+</html>

@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="format-detection" content="telphone=no, email=no">
+<title>vuejs学习</title>
+<style>
+.content{
+   border:1px solid #e6e6e6
+}
+.content2{
+  background:#e6e6e6
+}
+.button{
+            width:20px;
+			height:20px;
+			line-height:20p;
+			text-align:center;
+			background:#f2f2f2;
+			border:1px solid #e6e6e6;
+			margin:5px 0;
+			cursor:pointer
+}
+</style>
+</head>
+<script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+{{ message  }}
+</div>
+<div id="app-2">
+  <span v-bind:title="message">
+    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+  </span>
+</div>
+<div id="app3">
+<p>动态绑定数据：{{message}}</p>
+<input type="text" v-model="message" v-bind:style="inputStyle"/></div>
+<!--全局注册组件-->
+<div class="mycomponent">
+<my-component v-bind:style="styleobj"></my-component>
+</div>
+<div id="my2component">
+<my-component class="content2"></my-component>
+</div>
+<!--局部全局注册组件-->
+<div id="othercomponent">
+<other-component></other-component>
+</div>
+<!--点击事件和组件-->
+<div id="click">
+  <simple-counter></simple-counter>
+  <simple-counter></simple-counter>
+  <simple-counter></simple-counter>
+</div>
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: '这是测试vuejs'
+  }
+})
+var app2 = new Vue({
+  el: '#app-2',
+  data: {
+    message: '页面加载于 ' + new Date().getFullYear()
+  }
+})
+var  app3 = new Vue({
+  el: '#app3',
+  data: {
+    message: "这是数据双向绑定",
+	inputStyle:{
+	 color:"red"
+	}
+  }
+});
+</script>
+<script type="text/javascript">
+Vue.component("my-component",{
+template:'<div class="content"><p>这是测试Vue的组件功能</p><div ><p>颜色分类：黑色</p><p>尺码：40</p></div></div>'
+});
+new  Vue({
+  el :'.mycomponent',
+  data:{
+styleobj:{
+ color:"red",
+   fontSize:"20px"	
+}   
+  }
+});
+ var  child={
+   template:"<div ><p>这是测试Vue的组件功能</p><div ><p>颜色分类：黑色</p><p>尺码：40</p></div></div>'"
+ }
+ new Vue({
+ el:"#othercomponent",
+  components:{"other-component":child}
+ });
+ new  Vue({
+  el:"#my2component"
+ });
+ 
+ 
+</script>
+<script type="text/javascript">
+var  data = { counter: 0 }
+Vue.component("simple-counter", {
+  template: '<div class="button"  v-on:click="counter ++">{{ counter }}</div>',
+
+  data: function () {
+    return { counter: 0 }
+  }
+})
+new Vue({
+  el: '#click'
+})
+</script>
+</body></html>
