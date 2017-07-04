@@ -100,44 +100,44 @@ body{
 <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script type="text/javascript">
 
-       $(function(){
-               var  imgClick={};
-               var  imgHeight =$(".img_big img").height();//获取当前图片高度
-               var  imgWidth =$(".img_big img").width();//获取当前图片宽度
-               var  showWidth=($(window).width()- imgWidth)/2;//点击后图片距离左边位置
-               var  showHeight=($(window).height()- imgHeight)/2;//点击后图片距离顶部位置
-                
-               $(".box_img p b").hover(function ()
+       $(function()
+	 {
+               var  imgClick={};//声明变量为空对象                          
+               imgClick.getImgShow=function()  //显示
 		      {
-                           $(this).css("cursor","pointer") //鼠标经过显示手的图标
+                            var  imgHeight =$(".img_big img").height();//获取当前图片高度
+                            var  imgWidth =$(".img_big img").width();//获取当前图片宽度
+                            var  showWidth=($(window).width()- imgWidth)/2;//点击后图片距离左边位置
+                            var  showHeight=($(window).height()- imgHeight)/2;//点击后图片距离顶部位置
+                            $(".img_big").fadeIn();
+                            $(".img_big").css("top",showHeight );
+                            $(".img_big").css("left",showWidth);
+                            $(".overlay").fadeIn();
+                            $("body").css("overflow","hidden");//禁用滚动条				
+		      }
+			  
+               imgClick.getImgHide=function() //隐藏
+		      {
+                            $(".overlay").fadeOut();
+                            $(".img_big").fadeOut();
+                            $("body").css("overflow","auto");		
+		      },
+               $(".box_img p b").click(function ()  //点击后图片渐现
+		      { 
+                            imgClick.getImgShow()	
+		      }) 
+				
+               $(".img_big").click(function  ()    //点击后图片渐隐
+		      { 
+                            imgClick.getImgHide()						   
 		      })
 			  
-               imgClick.getImgShow=function()
-		               {
-                                    $(".img_big").fadeIn();
-                                    $(".img_big").css("top",showHeight );
-                                    $(".img_big").css("left",showWidth);
-                                    $(".overlay").fadeIn();
-                                    $("body").css("overflow","hidden");//禁用滚动条				
-		               },
-               imgClick.getImgHide=function()
-		               {
-                                $(".overlay").fadeOut();
-                                    $(".img_big").fadeOut();
-                                    $("body").css("overflow","auto");		
-		               },
-
-                           $(".box_img p b").click(function ()
-		               { //点击后图片渐现
-                                    imgClick.getImgShow()	
-		               }) 
-				
-                           $(".img_big").click(function  ()
-		               { //点击后图片渐隐
-                                    imgClick.getImgHide()						   
-		               })
+               $(".box_img p b").hover(function ()
+		      {
+                            $(this).css("cursor","pointer") //鼠标经过显示手的图标
+		      })			  			  
 //结束				     	 
-})	
+	 })	
 </script>
 </head>
 <body>
