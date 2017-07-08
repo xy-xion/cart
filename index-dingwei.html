@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-		<meta charset="utf-8">
+	<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -13,8 +13,7 @@
 </head>
 <body>
 <div onclick="getLocation()" style="border:1px solid #e6e6e6; cursor:pointer; width:150px;background:#e6e6e6;height:35px;line-height:35px">点我获取当前城市：</div><span></span>
-
-  <script>
+<script type="text/javascript">
            function  getLocation(){
                var options={
                    enableHighAccuracy:true, 
@@ -35,7 +34,6 @@
                var longitude =position.coords.longitude;
                //纬度
                var latitude = position.coords.latitude;
-    alert('经度'+longitude+'，纬度'+latitude);
                
                //根据经纬度获取地理位置，不太准确，获取城市区域还是可以的
     var map = new BMap.Map("allmap");
@@ -44,7 +42,7 @@
     gc.getLocation(point, function(rs){
        var addComp = rs.addressComponents;
 	document.getElementsByTagName("span") [0] .innerHTML=   
-	addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
+	addComp.province + ", " + addComp.city 
     });
            }
            //失败时
@@ -64,6 +62,5 @@
                    break;
                }
            }
-     
-   </script>
+ </script>
 </body></html>
