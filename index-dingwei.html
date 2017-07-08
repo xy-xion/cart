@@ -42,7 +42,7 @@
     gc.getLocation(point, function(rs){
        var addComp = rs.addressComponents;
 	document.getElementsByTagName("span") [0] .innerHTML=   
-	addComp.province + ", " + addComp.city 
+	addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
     });
            }
            //失败时
@@ -63,4 +63,5 @@
                }
            }
  </script>
+ <script src="http://api.map.baidu.com/api?v=1.2" type="text/javascript"></script> 
 </body></html>
