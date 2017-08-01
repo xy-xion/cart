@@ -8,5 +8,11 @@
 
 <br>
 
+#### 发送手机验证码
+
+![Image text](https://raw.githubusercontent.com/xy-xion/cart/master/all-img/VerificationCode.gif)
+<br>
+<br>
+
 #### 手机端：购物车（可实时显示总价格）
 ![Image text](https://raw.githubusercontent.com/xy-xion/cart/master/all-img/cart.gif)
